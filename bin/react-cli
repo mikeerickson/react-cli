@@ -240,7 +240,7 @@ function createApplication(app_name, path) {
 		  "react-router" : "^1.0.2",
 		  "react-router-bootstrap" : "^0.19.3",
 		  "underscore" : "^1.8.3",
-		  "jing_react_components": "^0.0.3"
+		  "jing_react_components": "~0.0.4"
       }
     }
 
