@@ -1,0 +1,1 @@
+/* global module */var user = require('./controller/user');module.exports = function (app) {    app.get('/', user.index);	app.post('/users', user.list);};

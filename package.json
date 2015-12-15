@@ -1,0 +1,30 @@
+{
+  "name": "@wac/wacai_react_cli",
+  "description": "React' application generator",
+  "version": "0.0.1",
+  "author": {
+    "name": "falali",
+    "email": "falal@wacai.com"
+  },
+  "keywords": [
+    "express",
+	"react",
+	"app",
+    "web"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://git.caimi-inc.com/falali/wacai_react_cli.git"
+  },
+  "license": "MIT",
+  "main": "bin/react-cli",
+  "preferGlobal": true,
+  "bin": {
+    "react-cli": "./bin/react-cli"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "mkdirp": "^0.5.1",
+    "sorted-object": "1.0.0"
+  }
+}
