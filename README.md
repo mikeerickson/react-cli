@@ -1,7 +1,13 @@
+## Init 
+```sh
+$ npm install -g wnpm --registry=http://npm.caimi-inc.com
+```
+
+
 ## Installation
 
 ```sh
-$ npm install -g @wac/wacai_react_cli
+$ wnpm install -g @wac/wacai_react_cli
 ```
 
 ## Quick Start
