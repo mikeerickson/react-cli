@@ -1,7 +1,7 @@
 {
   "name": "@wac/wacai_react_cli",
   "description": "React' application generator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "name": "falali",
     "email": "falal@wacai.com"
