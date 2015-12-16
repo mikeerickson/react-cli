@@ -127,7 +127,7 @@ function createApplication(app_name, path) {
             complete();
         });
         mkdir(path + '/config', function () {
-            write(path + '/cas.js', cas);
+            write(path + '/config/cas.js', cas);
             complete();
         });
         mkdir(path + '/src');
