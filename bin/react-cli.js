@@ -106,7 +106,7 @@ function createApplication(app_name, path) {
     var user = loadTemplate('js/controller/user.js');
     var auth = loadTemplate('js/tools/auth.js');
     var host = loadTemplate('js/tools/host.js');
-    var cas = loadTemplate('js/tools/cas.js');
+    var cas = loadTemplate('js/config/cas.js');
     var comptest = loadTemplate('js/components/Comptest.js');
     var MainMenu = loadTemplate('js/components/MainMenu.js');
     var index = loadTemplate('js/containers/Index.js');
@@ -127,7 +127,7 @@ function createApplication(app_name, path) {
             complete();
         });
         mkdir(path + '/config', function () {
-            write(path + '/cas.js', cas);
+            write(path + '/config/cas.js', cas);
             complete();
         });
         mkdir(path + '/src');
