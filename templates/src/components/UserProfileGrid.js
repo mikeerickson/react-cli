@@ -3,6 +3,7 @@
 import React from 'react'; 
 import { Panel, Grid, Row, Col, Button, Thumbnail, Label, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import hostconfig from '../tools/host';
 
 class UserProfileGrid extends React.Component {
 
@@ -32,7 +33,7 @@ class UserProfileGrid extends React.Component {
                         pLabels.push(<ListGroupItem key={index} bsStyle={itemStyle} style={labelStyle}>{label + d[item]}</ListGroupItem>);
                     }
                     return <Col xs={4} md={4} key={j} style={{padding: 3}}>
-                            <LinkContainer to={"/" + datatype + "?key=" + JSON.stringify(d)}>
+                            <LinkContainer to={hostconfig.local_host + "/" + datatype + "?key=" + JSON.stringify(d)}>
                                 <ListGroup fill style={{padding:0, margin: 0}}>{pLabels}</ListGroup>
                             </LinkContainer>
                         </Col>;
@@ -43,7 +44,7 @@ class UserProfileGrid extends React.Component {
             }else{
                 item = <Thumbnail key={i} style={thumbStyle}>
                     <Row><Col xs={4} md={4} style={{padding: 3}}>
-                        <LinkContainer to={"/" + datatype + "?key=" + JSON.stringify(info)}>
+                        <LinkContainer to={hostconfig.local_host + "/" + datatype + "?key=" + JSON.stringify(info)}>
                             <ListGroup fill style={{padding:0, margin: 0}}>
                                 <ListGroupItem bsStyle="warning" key={1} style={labelStyle}>{info.title}</ListGroupItem>
                                 <ListGroupItem bsStyle="success" key={2} style={labelStyle}>{info.desc}</ListGroupItem>

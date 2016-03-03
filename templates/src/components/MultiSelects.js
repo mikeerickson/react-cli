@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react'; 
-import { LinkContainer } from 'react-router-bootstrap';
 import { Panel, Label, Row, Col, ButtonGroup, Button, Table, Input } from 'react-bootstrap';
 
 class MultiSelect extends React.Component {
@@ -91,7 +90,7 @@ class MultiSelects extends React.Component {
     }
 
     render() {
-        const { itemValue, itemLabel } = this.props;
+        const { itemValue, itemLabel, xs, txs } = this.props;
         const { source, target } = this.state;
         let ldisabled, rdisabled;
         
@@ -108,10 +107,10 @@ class MultiSelects extends React.Component {
         }
         
         return <Row>
-            <Col xs={2}>
+            <Col xs={xs || 5}>
                 <MultiSelect items={source} itemValue={itemValue} itemLabel={itemLabel} onSelect={this.handleLeftSelect.bind(this)}/>
             </Col>
-            <Col xs={1} style={{textAlign: "center", padding: 10}}>
+            <Col xs={txs || 2} style={{textAlign: "center", padding: 10}}>
                 <ButtonGroup vertical>
                     <Button disabled={ldisabled} bsSize="small" onClick={this.handleLeftSingle.bind(this)}> {' >'} </Button>
                     <Button disabled={ldisabled} bsSize="small" onClick={this.handleLeftMultiple.bind(this)}> {'>>'} </Button>
@@ -119,7 +118,7 @@ class MultiSelects extends React.Component {
                     <Button disabled={rdisabled} bsSize="small" onClick={this.handleRightMultiple.bind(this)}> {'<<'} </Button>
                 </ButtonGroup>
             </Col>
-            <Col xs={2}>
+            <Col xs={xs || 5}>
                 <MultiSelect items={target} itemValue={itemValue} itemLabel={itemLabel} onSelect={this.handleRightSelect.bind(this)}/>
             </Col>
         </Row>
