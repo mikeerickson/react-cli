@@ -22,27 +22,27 @@ before(cmd, 'outputHelp', function () {
 });
 
 cmd.version(version).usage('[options] [dir]')
-    .option('-e, --ejs', 'add ejs template engine support (defaults to jade)')
-    .option('    --hbs', 'add handlebars template engine support')
-    .option('-H, --hogan', 'add hogan.js template engine support')
-    .option('-w, --webpack', 'add webpack template engine support')
-    .option('-c, --css <engine>', 'add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
-    .option('    --git', 'add .gitignore')
-    .option('-f, --force', 'force on non-empty directory')
-    .option('-P, --pm2', 'add PM2 production process manager for Node.js applications')
-    .parse(process.argv);
+        .option('-e, --ejs', 'add ejs template engine support (defaults to jade)')
+        .option('    --hbs', 'add handlebars template engine support')
+        .option('-H, --hogan', 'add hogan.js template engine support')
+        .option('-w, --webpack', 'add webpack template engine support')
+        .option('-c, --css <engine>', 'add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
+        .option('    --git', 'add .gitignore')
+        .option('-f, --force', 'force on non-empty directory')
+        .option('-P, --pm2', 'add PM2 production process manager for Node.js applications')
+        .parse(process.argv);
 
 if (!_exit.exited) {
     main();
 }
 
 function before(obj, method, fn) {
-  var old = obj[method];
+    var old = obj[method];
 
-  obj[method] = function () {
-    fn.call(this);
-    old.apply(this, arguments);
-  };
+    obj[method] = function () {
+        fn.call(this);
+        old.apply(this, arguments);
+    };
 }
 
 /**
@@ -61,7 +61,8 @@ function confirm(msg, callback) {
         rl.close();
         callback(/^y|yes|ok|true$/i.test(input));
     });
-};
+}
+;
 
 /**
  * 
@@ -70,7 +71,7 @@ function confirm(msg, callback) {
  * @returns {undefined}
  */
 function createApplication(app_name, path) {
-    var wait = 5;
+    var wait = 2;
     
     console.log();
     function complete() {
@@ -92,12 +93,12 @@ function createApplication(app_name, path) {
 
         console.log();
     }
-    
-    var app = loadTemplate('templates/app.js');
-    var router = loadTemplate('templates/router.js');
-    
+
+    var app = loadTemplate('templates/js/app.js');
+    var router = loadTemplate('templates/js/router.js');
+
     mkdir(path, function () {
-        
+
         // 生成package.json
         var pkg = {
             name: app_name
@@ -120,9 +121,11 @@ function createApplication(app_name, path) {
                 "react-router": "~1.0.2",
                 "react-router-bootstrap": "~0.19.3",
                 "underscore": "~1.8.3"
+            },
+            devDependencies: {
             }
         };
-        
+
         // 生成模板
         mkdir(path + '/src/views', function () {
             app = app.replace('{views}', cmd.template);
@@ -130,33 +133,33 @@ function createApplication(app_name, path) {
                 case 'ejs':
                     copyTemplate('templates/views/ejs/index.ejs', path + '/src/views/index.ejs');
                     copyTemplate('templates/views/ejs/error.ejs', path + '/src/views/error.ejs');
-                    
+
                     pkg.dependencies['ejs'] = '~2.4.1';
                     break;
                 case 'jade':
                     copyTemplate('templates/views/jade/index.jade', path + '/src/views/index.jade');
                     copyTemplate('templates/views/jade/layout.jade', path + '/src/views/layout.jade');
                     copyTemplate('templates/views/jade/error.jade', path + '/src/views/error.jade');
-                    
+
                     pkg.dependencies['jade'] = '~1.11.0';
                     break;
                 case 'hjs':
                     copyTemplate('templates/views/hogan/index.hjs', path + '/src/views/index.hjs');
                     copyTemplate('templates/views/hogan/error.hjs', path + '/src/views/error.hjs');
-                    
+
                     pkg.dependencies['hjs'] = '~0.0.6';
                     break;
                 case 'hbs':
                     copyTemplate('templates/views/hbs/index.hbs', path + '/src/views/index.hbs');
                     copyTemplate('templates/views/hbs/layout.hbs', path + '/src/views/layout.hbs');
                     copyTemplate('templates/views/hbs/error.hbs', path + '/src/views/error.hbs');
-                    
+
                     pkg.dependencies['hbs'] = '~4.0.0';
                     break;
             }
             complete();
         });
-        
+
         // 生成css
         mkdir(path + '/src/stylesheets', function () {
             switch (cmd.css) {
@@ -164,25 +167,25 @@ function createApplication(app_name, path) {
                     copyTemplate('templates/css/style.less', path + '/src/stylesheets/style.less');
                     copyTemplate('templates/css/bootstrap.less', path + '/src/stylesheets/bootstrap.less');
                     app = app.replace('{css}', eol + 'app.use(require(\'less-middleware\')(path.join(__dirname, \'src\')));');
-                    
+
                     pkg.dependencies['less-middleware'] = '~2.1.0';
                     break;
                 case 'stylus':
                     copyTemplate('templates/css/style.styl', path + '/src/stylesheets/style.styl');
                     app = app.replace('{css}', eol + 'app.use(require(\'stylus\').middleware(path.join(__dirname, \'src\')));');
-                    
+
                     pkg.dependencies['stylus'] = '~0.53.0';
                     break;
                 case 'compass':
                     copyTemplate('templates/css/style.scss', path + '/src/stylesheets/style.scss');
                     app = app.replace('{css}', eol + 'app.use(require(\'node-compass\')({mode: \'expanded\'}));');
-                    
+
                     pkg.dependencies['node-compass'] = '~0.2.4';
                     break;
                 case 'sass':
                     copyTemplate('templates/css/style.sass', path + '/src/stylesheets/style.sass');
                     app = app.replace('{css}', eol + 'app.use(require(\'node-sass-middleware\')({\n  src: path.join(__dirname, \'src\'),\n  dest: path.join(__dirname, \'src\'),\n  indentedSyntax: true,\n  sourceMap: true\n}));');
-                    
+
                     pkg.dependencies['node-sass-middleware'] = '~0.9.7';
                     break;
                 default:
@@ -197,11 +200,11 @@ function createApplication(app_name, path) {
         if (cmd.webpack) {
             app = app.replace('{webpack}', eol + fs.readFileSync(__dirname + '/../templates/webpack.js', 'utf-8'));
             write(path + '/webpack.config.js', loadTemplate('templates/webpack.config.js'));
-            
+
             pkg.dependencies['webpack'] = '~1.12.14';
             pkg.dependencies['webpack-dev-middleware'] = '~1.5.1';
             pkg.dependencies['webpack-hot-middleware'] = '~2.9.0';
-            
+
         } else {
             app = app.replace('{webpack}', '');
         }
@@ -232,7 +235,7 @@ function createApplication(app_name, path) {
         util.copySync('templates/js/controller', path + '/controller');
         util.copySync('templates/js/models', path + '/models');
         util.copySync('templates/js/test', path + '/test');
-        
+
         // git
         if (cmd.git) {
             write(path + '/.gitignore', fs.readFileSync(__dirname + '/../templates/gitignore', 'utf-8'));
@@ -240,7 +243,8 @@ function createApplication(app_name, path) {
 
         complete();
     });
-};
+}
+;
 
 /**
  * Check if the given directory `path` is empty
@@ -254,7 +258,8 @@ function emptyDirectory(path, fn) {
             throw err;
         fn(!files || !files.length);
     });
-};
+}
+;
 
 /**
  * 
@@ -278,7 +283,8 @@ function exit(code) {
     });
 
     done();
-};
+}
+;
 
 /**
  * 
@@ -286,7 +292,8 @@ function exit(code) {
  */
 function launchedFromCmd() {
     return process.platform === 'win32' && process.env._ === undefined;
-};
+}
+;
 
 /**
  * 
@@ -295,7 +302,8 @@ function launchedFromCmd() {
  */
 function loadTemplate(name) {
     return fs.readFileSync(path.join(__dirname, '..', name), 'utf-8');
-};
+}
+;
 
 /**
  * 
@@ -305,7 +313,8 @@ function loadTemplate(name) {
  */
 function copyTemplate(from, to) {
     write(to, loadTemplate(from));
-};
+}
+;
 
 /**
  * main
@@ -326,7 +335,7 @@ function main() {
         cmd.template = 'hjs';
     if (cmd.hbs)
         cmd.template = 'hbs';
-    
+
     emptyDirectory(destinationPath, function (empty) {
         if (empty || cmd.force) {
             createApplication(appName, destinationPath);
@@ -342,7 +351,8 @@ function main() {
             });
         }
     });
-};
+}
+;
 
 /**
  * echo str > path.
@@ -354,7 +364,8 @@ function main() {
 function write(path, str, mode) {
     fs.writeFileSync(path, str, {mode: mode || 0666});
     console.log('   \x1b[36mcreate\x1b[0m : ' + path);
-};
+}
+;
 
 /**
  * Mkdir -p
@@ -369,4 +380,5 @@ function mkdir(path, fn) {
         console.log('   \033[36mcreate\033[0m : ' + path);
         fn && fn();
     });
-};
+}
+;
