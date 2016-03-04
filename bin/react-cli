@@ -32,25 +32,18 @@ cmd.version(version).usage('[options] [dir]')
     .option('-P, --pm2', 'add PM2 production process manager for Node.js applications')
     .parse(process.argv);
 
-if (!exit.exited) {
+if (!_exit.exited) {
     main();
 }
 
-/**
- * 
- * @param {type} obj
- * @param {type} method
- * @param {type} fn
- * @returns {before}
- */
-var before = function(obj, method, fn) {
-    var old = obj[method];
+function before(obj, method, fn) {
+  var old = obj[method];
 
-    obj[method] = function () {
-        fn.call(this);
-        old.apply(this, arguments);
-    };
-};
+  obj[method] = function () {
+    fn.call(this);
+    old.apply(this, arguments);
+  };
+}
 
 /**
  * 
@@ -58,7 +51,7 @@ var before = function(obj, method, fn) {
  * @param {type} callback
  * @returns {undefined}
  */
-var confirm = function(msg, callback) {
+function confirm(msg, callback) {
     var rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
@@ -76,7 +69,7 @@ var confirm = function(msg, callback) {
  * @param {type} path
  * @returns {undefined}
  */
-var createApplication = function(app_name, path) {
+function createApplication(app_name, path) {
     var wait = 5;
     
     console.log();
@@ -255,7 +248,7 @@ var createApplication = function(app_name, path) {
  * @param {type} fn
  * @returns {undefined}
  */
-var emptyDirectory = function(path, fn) {
+function emptyDirectory(path, fn) {
     fs.readdir(path, function (err, files) {
         if (err && 'ENOENT' != err.code)
             throw err;
@@ -268,7 +261,7 @@ var emptyDirectory = function(path, fn) {
  * @param {type} code
  * @returns {undefined}
  */
-var exit = function(code) {
+function exit(code) {
     function done() {
         if (!(draining--))
             _exit(code);
@@ -291,7 +284,7 @@ var exit = function(code) {
  * 
  * @returns {Boolean}
  */
-var launchedFromCmd = function() {
+function launchedFromCmd() {
     return process.platform === 'win32' && process.env._ === undefined;
 };
 
@@ -300,8 +293,8 @@ var launchedFromCmd = function() {
  * @param {type} name
  * @returns {unresolved}
  */
-var loadTemplate = function(name) {
-    return fs.readFileSync(path.join(__dirname, '..', 'templates', name), 'utf-8');
+function loadTemplate(name) {
+    return fs.readFileSync(path.join(__dirname, '..', name), 'utf-8');
 };
 
 /**
@@ -310,7 +303,7 @@ var loadTemplate = function(name) {
  * @param {type} to
  * @returns {undefined}
  */
-var copyTemplate = function(from, to) {
+function copyTemplate(from, to) {
     write(to, loadTemplate(from));
 };
 
@@ -318,7 +311,7 @@ var copyTemplate = function(from, to) {
  * main
  * @returns {undefined}
  */
-var main = function() {
+function main() {
     // Path
     var destinationPath = cmd.args.shift() || '.';
 
@@ -358,7 +351,7 @@ var main = function() {
  * @param {type} mode
  * @returns {undefined}
  */
-var write = function (path, str, mode) {
+function write(path, str, mode) {
     fs.writeFileSync(path, str, {mode: mode || 0666});
     console.log('   \x1b[36mcreate\x1b[0m : ' + path);
 };
@@ -369,15 +362,11 @@ var write = function (path, str, mode) {
  * @param {type} fn
  * @returns {undefined}
  */
-var mkdir = function (path, fn) {
+function mkdir(path, fn) {
     mkdirp(path, 0755, function (err) {
         if (err)
             throw err;
         console.log('   \033[36mcreate\033[0m : ' + path);
         fn && fn();
     });
-};
-
-var copy = function (src, dist) {
-    
 };
