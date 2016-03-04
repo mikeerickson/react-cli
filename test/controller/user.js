@@ -1,0 +1,1 @@
+/* global require, exports */var CAS = require('node-cas');var casConfig = require('../config/cas');exports.index = function (req, res) {    res.render('index', {        title: 'React CLI',        message: "Welcome to React!"    });};
