@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var config = require('./config/config');
 
 var app = express();
 
@@ -19,15 +20,11 @@ app.set('view engine', '{views}');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());{css}
+app.use(cookieParser());
+{css}
 app.use(express.static(path.join(__dirname, 'src')));
 // 设置 Session
-app.use(session({
-    name: "react_cli_test",
-    secret: "react_cli_test",
-    resave: true,
-    saveUninitialized: true
-}));
+app.use(session(config.session));
 
 // 使用路由
 router(app);

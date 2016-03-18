@@ -11,6 +11,9 @@ export const base = {
 // user
 export const user = {
     list: host + '/user/list',
+    del: host + '/user/del',
+    add: host + '/user/add',
+    update: host + '/user/update',
     login: host + '/user/login/{user}/{password}',
     logout: host + '/user/logout'
 };

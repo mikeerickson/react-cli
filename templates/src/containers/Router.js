@@ -2,13 +2,14 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import MainMenu from './MainMenu';
-import Searcher from './UserSearcher';
+import UserLogin from './UserLogin';
+import UserList from './UserList';
 
 const routes = (
     <Route path="/" component={MainMenu}>
-        <IndexRoute component={Searcher}/>
-        <Route path="searcher" component={Searcher}/>
-        <Route path="*" component={Searcher}/>
+        <IndexRoute component={UserList}/>
+        <Route path="userlist" component={UserList}/>
+        <Route path="*" component={UserList}/>
     </Route>
 );
 

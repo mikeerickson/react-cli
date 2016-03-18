@@ -1,0 +1,1 @@
+/* global require, exports */exports.validate = function (req, res, next) {    next();};
