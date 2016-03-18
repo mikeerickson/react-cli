@@ -125,64 +125,60 @@ function createApplication(app_name, path) {
         };
         
         // 生成模板
-        mkdir(path + '/src/views', function () {
-            app = app.replace('{views}', cmd.template);
-            switch (cmd.template) {
-                case 'ejs':
-                    util.copySync('templates/views/ejs', path + '/src/views');
-                    pkg.dependencies['ejs'] = '~2.4.1';
-                    break;
-                case 'jade':
-                    util.copySync('templates/views/jade', path + '/src/views');
-                    pkg.dependencies['jade'] = '~1.11.0';
-                    break;
-                case 'hjs':
-                    util.copySync('templates/views/hogan', path + '/src/views');
-                    pkg.dependencies['hjs'] = '~0.0.6';
-                    break;
-                case 'hbs':
-                    util.copySync('templates/views/hbs', path + '/src/views');
-                    pkg.dependencies['hbs'] = '~4.0.0';
-                    break;
-            }
-            complete();
-        });
+        app = app.replace('{views}', cmd.template);
+        switch (cmd.template) {
+            case 'ejs':
+                util.copySync('templates/views/ejs', path + '/src/views');
+                pkg.dependencies['ejs'] = '~2.4.1';
+                break;
+            case 'jade':
+                util.copySync('templates/views/jade', path + '/src/views');
+                pkg.dependencies['jade'] = '~1.11.0';
+                break;
+            case 'hjs':
+                util.copySync('templates/views/hogan', path + '/src/views');
+                pkg.dependencies['hjs'] = '~0.0.6';
+                break;
+            case 'hbs':
+                util.copySync('templates/views/hbs', path + '/src/views');
+                pkg.dependencies['hbs'] = '~4.0.0';
+                break;
+        }
         
         // 生成css
-        mkdir(path + '/src/stylesheets', function () {
-            switch (cmd.css) {
-                case 'less':
-                    util.copySync('templates/css/style.less', path + '/src/stylesheets/style.less');
-                    util.copySync('templates/css/bootstrap.less', path + '/src/stylesheets/bootstrap.less');
-                    app = app.replace('{css}', eol + 'app.use(require(\'less-middleware\')(path.join(__dirname, \'src\')));');
-                    
-                    pkg.dependencies['less-middleware'] = '~2.1.0';
-                    break;
-                case 'stylus':
-                    util.copySync('templates/css/style.styl', path + '/src/stylesheets/style.styl');
-                    app = app.replace('{css}', eol + 'app.use(require(\'stylus\').middleware(path.join(__dirname, \'src\')));');
-                    
-                    pkg.dependencies['stylus'] = '~0.53.0';
-                    break;
-                case 'compass':
-                    util.copySync('templates/css/style.scss', path + '/src/stylesheets/style.scss');
-                    app = app.replace('{css}', eol + 'app.use(require(\'node-compass\')({mode: \'expanded\'}));');
-                    
-                    pkg.dependencies['node-compass'] = '~0.2.4';
-                    break;
-                case 'sass':
-                    util.copySync('templates/css/style.sass', path + '/src/stylesheets/style.sass');
-                    app = app.replace('{css}', eol + 'app.use(require(\'node-sass-middleware\')({\n  src: path.join(__dirname, \'src\'),\n  dest: path.join(__dirname, \'src\'),\n  indentedSyntax: true,\n  sourceMap: true\n}));');
-                    
-                    pkg.dependencies['node-sass-middleware'] = '~0.9.7';
-                    break;
-                default:
-                    util.copySync('templates/css/style.css', path + '/src/stylesheets/style.css');
-                    util.copySync('templates/css/bootstrap.min.css', path + '/src/stylesheets/bootstrap.css');
-                    app = app.replace('{css}', '');
-            }
-            complete();
-        });
+        switch (cmd.css) {
+            case 'less':
+                util.copySync('templates/css/style.less', path + '/src/stylesheets/style.less');
+                util.copySync('templates/css/bootstrap.less', path + '/src/stylesheets/bootstrap.less');
+                app = app.replace('{css}', eol + 'app.use(require(\'less-middleware\')(path.join(__dirname, \'src\')));');
+
+                pkg.dependencies['less-middleware'] = '~2.1.0';
+                break;
+            case 'stylus':
+                util.copySync('templates/css/style.styl', path + '/src/stylesheets/style.styl');
+                app = app.replace('{css}', eol + 'app.use(require(\'stylus\').middleware(path.join(__dirname, \'src\')));');
+
+                pkg.dependencies['stylus'] = '~0.53.0';
+                break;
+            case 'compass':
+                util.copySync('templates/css/style.scss', path + '/src/stylesheets/style.scss');
+                app = app.replace('{css}', eol + 'app.use(require(\'node-compass\')({mode: \'expanded\'}));');
+
+                pkg.dependencies['node-compass'] = '~0.2.4';
+                break;
+            case 'sass':
+                util.copySync('templates/css/style.sass', path + '/src/stylesheets/style.sass');
+                app = app.replace('{css}', eol + 'app.use(require(\'node-sass-middleware\')({\n  src: path.join(__dirname, \'src\'),\n  dest: path.join(__dirname, \'src\'),\n  indentedSyntax: true,\n  sourceMap: true\n}));');
+
+                pkg.dependencies['node-sass-middleware'] = '~0.9.7';
+                break;
+            default:
+                util.copySync('templates/css/style.css', path + '/src/stylesheets/style.css');
+                util.copySync('templates/css/bootstrap.min.css', path + '/src/stylesheets/bootstrap.css');
+                console.log(app);
+                app = app.replace('{css}', '');
+                console.log(app);
+        }
 
         // 增加webpack支持
         if (cmd.webpack) {

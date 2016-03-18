@@ -8,7 +8,6 @@ var session = require('express-session');
 var config = require('./config/config');
 
 var app = express();
-
 {webpack}
 var router = require('./router');
 // view engine setup
