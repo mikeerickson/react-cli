@@ -1,1 +1,0 @@
-/* global require, exports */var menudata = require('../config/config').menu;exports.validate = function (req, res, next) {    if (req.session && req.session.user) {        next();    } else {        return res.redirect("login");    }};exports.getMainMemu = function (req, res) {    res.json({ok: true, data: menudata});};
