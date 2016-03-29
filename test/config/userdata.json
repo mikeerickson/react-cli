@@ -1,0 +1,29 @@
+[
+    {
+        "name": "admin",
+        "usename": "admin",
+        "email": "admin@test.com",
+        "mobile": "18500060123",
+        "sex": "男",
+        "age": 10,
+        "desc": "测试"
+    },
+    {
+        "name": "test",
+        "usename": "helloTest",
+        "email": "hello@abc.com",
+        "mobile": "18500060123",
+        "sex": "女",
+        "age": "18",
+        "desc": "测试"
+    },
+    {
+        "name": "zhima",
+        "usename": "zhimami",
+        "email": "zhima@qq.com",
+        "mobile": "18500001234",
+        "sex": "女",
+        "age": "42",
+        "desc": "测试"
+    }
+]

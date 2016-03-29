@@ -1,13 +1,7 @@
-## Init 
-```sh
-$ npm install -g wnpm --registry=http://npm.caimi-inc.com
-```
-
-
 ## Installation
 
 ```sh
-$ wnpm install -g @wac/wacai_react_cli
+$ npm install -g react_cli
 ```
 
 ## Quick Start
@@ -35,6 +29,7 @@ $ npm start
     -e, --ejs           add ejs engine support (defaults to jade)
         --hbs           add handlebars engine support
     -w, --webpack       add webpack engine support
+    -i, --ie8           add ie8 engine support
     -H, --hogan         add hogan.js engine support
     -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore

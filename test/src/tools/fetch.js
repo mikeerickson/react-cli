@@ -10,20 +10,23 @@ import _format from '../tools/util';
  * @returns {undefined}
  */
 export default function fetch(url, format, options, params) {
-    let props = {};
     if(format){
         url = _format(url, format);
     }
+    let props = {};
     if(options){
         if(!options.credentials){
             props = {...props, credentials: 'include'};
+        }
+        if(!options.headers){
+            props = {...props, headers: {"Content-Type": "application/json"}};
         }
         props = {...props, ...options};
     } else {
         props = {...props, credentials: 'include'};
     }
     if(params){
-        props = {...props, body: JSON.stringify({...params})};
+        props = {...props, body: JSON.stringify(params)};
     }
     return _fetch(url, props);
 }

@@ -10,10 +10,10 @@ export const base = {
 
 // user
 export const user = {
-    list: host + '/user/list',
-    del: host + '/user/del',
-    add: host + '/user/add',
-    update: host + '/user/update',
-    login: host + '/user/login/{user}/{password}',
-    logout: host + '/user/logout'
+    list: host + '/list',
+    del: host + '/del',
+    add: host + '/add',
+    update: host + '/update',
+    login: host + '/login/{username}/{password}',
+    logout: host + '/logout'
 };
