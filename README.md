@@ -29,6 +29,8 @@ Luncher
 
 ```html
 http://localhost:8801
+user: admin
+password: admin
 ```
 
 ## Command Line Options
