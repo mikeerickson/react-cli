@@ -19,8 +19,10 @@ $ npm install
 Rock and Roll
 
 ```bash
-$ npm start  #pm2 start
-$ npm test   #node start
+$ npm start     #pm2 start
+$ npm restart   #pm2 restart
+$ npm stop      #pm2 stop
+$ npm test      #node start
 ```
 
 ## Command Line Options
