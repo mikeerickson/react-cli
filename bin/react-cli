@@ -222,7 +222,6 @@ function createApplication(app_name, path) {
         copy('templates/js/config', path + '/config');
         copy('templates/js/controller', path + '/controller');
         copy('templates/js/models', path + '/models');
-        copy('templates/js/test', path + '/test');
 
         // 增加ie8+的支持
         if (cmd.ie8) {
