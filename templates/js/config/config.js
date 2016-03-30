@@ -14,14 +14,19 @@ var config = {
     },
     menu: [
         {
-            "value": "demo",
-            "label": "测试样例",
-            "desc": "测试样例"
+            "value": "user",
+            "label": "User",
+            "desc": "菜单0"
         },
         {
-            "value": "user",
-            "label": "用户列表",
-            "desc": "用户列表"
+            "value": "test",
+            "label": "Test",
+            "desc": "菜单1"
+        },
+        {
+            "value": "demo",
+            "label": "Demo",
+            "desc": "菜单2"
         }
     ]
 };

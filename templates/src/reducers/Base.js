@@ -13,7 +13,7 @@ export default function baseReducer(state = initialState, action) {
             errormsg: err
         });
     }
-    if(res && (res.code !== 0 || !res.ok)){
+    if(res && !res.ok){
         return Object.assign({}, state, {
             errormsg: res.msg || res.error
         });
