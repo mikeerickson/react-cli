@@ -7,13 +7,13 @@ $ npm install -g react_cli
 ## Quick Start
 
 ```bash
-$ react-cli test -e -w -i -p --git && cd test
+$ react-cli test -e -w -i -p --git
 ```
 
 Install dependencies:
 
 ```bash
-$ npm install
+$ cd test && npm install
 ```
 
 Rock and Roll
@@ -23,6 +23,12 @@ $ npm start     #pm2 start
 $ npm restart   #pm2 restart
 $ npm stop      #pm2 stop
 $ npm test      #node start
+```
+
+Luncher
+
+```html
+http://localhost:8801
 ```
 
 ## Command Line Options
