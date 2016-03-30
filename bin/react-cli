@@ -27,11 +27,11 @@ cmd.version(version).usage('[options] [dir]')
         .option('    --hbs', 'add handlebars template engine support')
         .option('-H, --hogan', 'add hogan.js template engine support')
         .option('-i, --ie8', 'add ie8 support')
-        .option('-w, --webpack', 'add webpack template engine support')
+        .option('-w, --webpack', 'add webpack middleware support')
         .option('-c, --css <engine>', 'add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
         .option('    --git', 'add .gitignore')
         .option('-f, --force', 'force on non-empty directory')
-        .option('-P, --pm2', 'add PM2 production process manager for Node.js applications')
+        .option('-p, --pm2', 'add PM2 production process manager for Node.js applications')
         .parse(process.argv);
 
 if (!_exit.exited) {
@@ -126,11 +126,11 @@ function createApplication(app_name, path) {
                 "react-dom": "~0.14.7",
                 "react-bootstrap": "~0.28.3",
                 "react-router": "~2.0.1",
-                "react-router-bootstrap": "~0.19.3",
+                "react-router-bootstrap": "~0.20.1",
                 "react-redux": "~4.4.1",
                 "redux": "~3.0.5",
                 "redux-logger": "~2.3.1",
-                "redux-router": "~1.0.0-beta7",
+                "redux-router": "~1.0.0-beta8",
                 "redux-thunk": "~1.0.3",
                 "underscore": "~1.8.3"
             }, devDependencies: {
@@ -203,8 +203,8 @@ function createApplication(app_name, path) {
             app = app.replace('{webpack}', '');
         }
 
-        pkg.devDependencies['babel-core'] = '~6.6.5';
-        pkg.devDependencies['babel-loader'] = '~6.2.4';
+        pkg.devDependencies['babel-core'] = '^5.8.35';
+        pkg.devDependencies['babel-loader'] = '^5.4.0';
         pkg.devDependencies['raw-loader'] = '~0.5.1';
         pkg.devDependencies['style-loader'] = '~0.13.0';
         pkg.devDependencies['babel-plugin-react-transform'] = '~2.0.2';
@@ -236,8 +236,17 @@ function createApplication(app_name, path) {
         } else {
             index = index.replace('{ie8}', '');
         }
-
         util.writeSync(path + '/src/containers/IndexExt.js', index);
+
+        // pm2
+        if (cmd.pm2) {
+            pkg.scripts["test"] = "node ./bin/www";
+            pkg.scripts["start"] = "pm2 start ./bin/www";
+            pkg.scripts["restart"] = "pm2 restart ./bin/www";
+            pkg.scripts["stop"] = "pm2 stop ./bin/www";
+        } else {
+            pkg.scripts["start"] = "node ./bin/www";
+        }
 
         // 写入文件
         util.writeSync(path + '/package.json', JSON.stringify(pkg, null, 4));
