@@ -9,7 +9,7 @@ import Demo from './Demo';
 const routes = (
     <Route path="/" component={MainMenu}>
         <IndexRoute component={UserList}/>
-        <Route path="user" component={UserList}/>
+        <Route path="userlist" component={UserList}/>
         <Route path="test" component={Test}/>
         <Route path="demo" component={Demo}/>
         <Route path="*" component={UserList}/>

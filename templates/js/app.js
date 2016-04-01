@@ -14,8 +14,7 @@ var router = require('./router');
 app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', '{views}');
 
-// uncomment after placing your favicon in /src
-//app.use(favicon(path.join(__dirname, 'src', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

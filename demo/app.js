@@ -9,22 +9,14 @@ var config = require('./config/config');
 
 var app = express();
 
-// 加入webpack
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var webpackconfig = require('./webpack.config');
-// 使用webpack
-var compiler = webpack(webpackconfig);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackconfig.output.publicPath }));
-app.use(webpackHotMiddleware(compiler));
+// 加入webpackvar webpack = require('webpack');var webpackDevMiddleware = require('webpack-dev-middleware');var webpackHotMiddleware = require('webpack-hot-middleware');var webpackconfig = require('./webpack.config');// 使用webpackvar compiler = webpack(webpackconfig);app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackconfig.output.publicPath }));app.use(webpackHotMiddleware(compiler));
 var router = require('./router');
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /src
-app.use(favicon(path.join(__dirname, 'src', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'src', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
