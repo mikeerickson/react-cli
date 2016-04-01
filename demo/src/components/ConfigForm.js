@@ -4,7 +4,7 @@ import React from 'react';
 import { Button, Label, Row, Col, Input, MenuItem, DropdownButton } from 'react-bootstrap';
 import _ from 'underscore';
 
-class SearchBar extends React.Component {
+class ConfigForm extends React.Component {
     
     constructor(props, context) {
         super(props, context);
@@ -217,4 +217,4 @@ class SearchBar extends React.Component {
     }
 }
 
-export default SearchBar;
+export default ConfigForm;

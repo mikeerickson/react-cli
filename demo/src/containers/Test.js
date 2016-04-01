@@ -19,4 +19,4 @@ class Test extends Component {
     
 }
 
-export default connect(state => {})(Test)
+export default connect(state => ({base: state.root.base}))(Test)
